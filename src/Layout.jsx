@@ -1,14 +1,16 @@
 import PropTypes from 'prop-types'
+import Header from './components/Header.jsx'
 
-const Layout = ({children}) => {
-  return (
-      <main className='bg-primaryDarkBlue w-full h-full min-h-screen'>
-          {children}
-      </main>
-  )
+const Layout = ({ children }) => {
+    return (
+        <div className="h-full min-h-screen w-full bg-primaryDarkBlue">
+            <Header />
+            <main>{children}</main>
+        </div>
+    )
 }
 
-export default Layout;
+export default Layout
 Layout.propTypes = {
     children: PropTypes.node,
-};
+}
