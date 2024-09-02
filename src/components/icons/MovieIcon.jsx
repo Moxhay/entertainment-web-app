@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 
-const Bookmark = ({ bg, border = 'none' }) => {
+const MovieIcon = ({ bg, border = 'none' }) => {
     return (
         <svg
             width="16"
@@ -19,8 +19,8 @@ const Bookmark = ({ bg, border = 'none' }) => {
     )
 }
 
-export default Bookmark
-Bookmark.propTypes = {
+export default MovieIcon
+MovieIcon.propTypes = {
     bg: PropTypes.string.isRequired,
     border: PropTypes.string,
 }
