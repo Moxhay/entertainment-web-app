@@ -6,7 +6,7 @@ import TvIcon from './icons/TvIcon.jsx'
 import Bookmark from './icons/Bookmark.jsx'
 import { useButtonColor } from '../helpers.jsx'
 
-export const Header = () => {
+const Header = () => {
     const home = useButtonColor('/')
     const movie = useButtonColor('/Movies')
     const tv = useButtonColor('/TvShow')
@@ -30,3 +30,4 @@ export const Header = () => {
         </header>
     )
 }
+export default Header
