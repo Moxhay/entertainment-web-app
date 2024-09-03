@@ -1,14 +1,15 @@
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
-const NavButton = ({ href, logo }) => {
+const NavButton = ({ to, logo }) => {
     return (
         <button>
-            <a href={href}>{logo}</a>
+            <Link to={to}>{logo}</Link>
         </button>
     )
 }
 export default NavButton
 NavButton.propTypes = {
-    href: PropTypes.string.isRequired,
+    to: PropTypes.string.isRequired,
     logo: PropTypes.element.isRequired,
 }
