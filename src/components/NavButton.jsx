@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 
 const NavButton = ({ to, logo }) => {
     return (
-        <button>
-            <Link to={to}>{logo}</Link>
-        </button>
+        <Link to={to} className="hover:cursor-pointer">
+            {logo}
+        </Link>
     )
 }
 export default NavButton
