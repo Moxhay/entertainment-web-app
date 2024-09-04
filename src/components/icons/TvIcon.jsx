@@ -1,18 +1,19 @@
 import PropTypes from 'prop-types'
 
-const TvIcon = ({ bg, border = 'none' }) => {
+const TvIcon = ({ bg }) => {
     return (
         <svg
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            fill={border}
+            className="h-4 w-4 md:h-5 md:w-5"
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
             xmlns="http://www.w3.org/2000/svg"
         >
             <path
                 fillRule="evenodd"
                 clipRule="evenodd"
-                d="M7.264 3.58487H16V16H0V3.58487H3.936L1.776 0.962173L3.024 0.0232784L5.6 3.12706L8.176 0L9.424 0.962173L7.264 3.58487ZM1.6 14.4481H9.6V5.13676H1.6V14.4481ZM13.6 11.3443H12V9.79243H13.6V11.3443ZM12 8.24054H13.6V6.68865H12V8.24054Z"
+                d="M9.08 4.48109H20V20H0V4.48109H4.92L2.22 1.20272L3.78 0.029098L7 3.90883L10.22 0L11.78 1.20272L9.08 4.48109ZM2 6.42095V18.0601H12V6.42095H2ZM17 14.1804H15V12.2405H17V14.1804ZM15 10.3007H17V8.36082H15V10.3007Z"
                 fill={bg}
             />
         </svg>
@@ -22,5 +23,4 @@ const TvIcon = ({ bg, border = 'none' }) => {
 export default TvIcon
 TvIcon.propTypes = {
     bg: PropTypes.string.isRequired,
-    border: PropTypes.string,
 }
