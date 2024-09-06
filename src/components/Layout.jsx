@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types'
-import Header from './components/Header.jsx'
+import Header from './Header.jsx'
 
 const Layout = ({ children }) => {
     return (
-        <div className="h-full min-h-screen w-full bg-primaryDarkBlue">
+        <div className="mx-auto flex h-full min-h-screen overflow-hidden bg-primaryDarkBlue">
             <Header />
-            <main>{children}</main>
+            <main className="py-5">{children}</main>
         </div>
     )
 }
