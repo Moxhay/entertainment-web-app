@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 
-const TvIcon = ({ bg }) => {
+const TvIcon = ({ bg, style = 'h-4 w-4 md:h-5 md:w-5' }) => {
     return (
         <svg
-            className="h-4 w-4 md:h-5 md:w-5"
+            className={style}
             width="20"
             height="20"
             viewBox="0 0 20 20"
@@ -23,4 +23,5 @@ const TvIcon = ({ bg }) => {
 export default TvIcon
 TvIcon.propTypes = {
     bg: PropTypes.string.isRequired,
+    style: PropTypes.string,
 }
