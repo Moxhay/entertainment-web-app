@@ -1,11 +1,17 @@
 import PropTypes from 'prop-types'
-import Header from './Header.jsx'
+import Header from './NavBar/Header.jsx'
+import { Outlet } from 'react-router-dom'
 
-const Layout = ({ children }) => {
+const Layout = () => {
     return (
-        <div className="mx-auto flex h-full min-h-screen overflow-hidden bg-primaryDarkBlue">
-            <Header />
-            <main className="py-5">{children}</main>
+        <div className="mx-auto flex h-full min-h-screen w-full flex-col overflow-hidden bg-primaryDarkBlue sm:flex-col xl:flex-row">
+            <div className="flex">
+                <Header />
+            </div>
+
+            <main className="flex h-full w-full flex-col py-5 xl:pl-40 xl:pt-5">
+                <Outlet />
+            </main>
         </div>
     )
 }

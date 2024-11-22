@@ -1,24 +1,16 @@
-import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import Layout from './components/Layout.jsx'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Home from './components/Home.jsx'
-import Movies from './components/Movies.jsx'
-import TvShow from './components/TvShow.jsx'
-import Bookmarked from './components/Bookmarked.jsx'
+import { BrowserRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import { store } from './store/store.js'
+import App from './App.jsx'
 
 createRoot(document.getElementById('root')).render(
-    <StrictMode>
+    // <StrictMode>
+    <Provider store={store}>
         <BrowserRouter>
-            <Layout>
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/Movies" element={<Movies />} />
-                    <Route path="/TvShow" element={<TvShow />} />
-                    <Route path="/Bookmark" element={<Bookmarked />} />
-                </Routes>
-            </Layout>
+            <App />
         </BrowserRouter>
-    </StrictMode>
+    </Provider>
+    // {/*</StrictMode>*/}
 )

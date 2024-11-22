@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 
-const MovieIcon = ({ bg }) => {
+const MovieIcon = ({ bg, style = 'h-4 w-4 md:h-5 md:w-5' }) => {
     return (
         <svg
-            className="h-4 w-4 md:h-5 md:w-5"
+            className={style}
             viewBox="0 0 20 20"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -21,4 +21,5 @@ const MovieIcon = ({ bg }) => {
 export default MovieIcon
 MovieIcon.propTypes = {
     bg: PropTypes.string.isRequired,
+    style: PropTypes.string,
 }
