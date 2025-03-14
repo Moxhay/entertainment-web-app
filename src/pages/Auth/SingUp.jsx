@@ -1,14 +1,14 @@
-import { Formik } from 'formik'
-import * as Yup from 'yup'
-import { useNavigate } from 'react-router-dom'
-import FormInput from '../components/form/FormInput.jsx'
-import api from '../api/api.js'
-import { useState } from 'react'
-import { FormButton } from '@components/form/FormButton.jsx'
-import { AuthFooter } from '../components/form/AuthFooter.jsx'
-import { FormWrapper } from '../components/form/FormWrapper.jsx'
-import { Form } from '../components/form/Form.jsx'
-import { submitForm } from '../helpers.jsx'
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { useNavigate } from 'react-router-dom';
+import FormInput from '@components/form/FormInput.jsx';
+import api from '../../api/api.js';
+import { useState } from 'react';
+import { FormButton } from '@components/form/FormButton.jsx';
+import { AuthFooter } from '@components/form/AuthFooter.jsx';
+import { FormWrapper } from '@components/form/FormWrapper.jsx';
+import { Form } from '@components/form/Form.jsx';
+import { submitForm } from '../../helpers.jsx';
 
 const ValidationSchema = Yup.object().shape({
     email: Yup.string().email('enter a valid email').required("Can't be empty"),
@@ -19,18 +19,18 @@ const ValidationSchema = Yup.object().shape({
 
     confirmPassword: Yup.string()
         .oneOf([Yup.ref('password'), null], 'Password must match.')
-        .required('Confirm Password is required.'),
-})
+        .required('Confirm Password is required.')
+});
 const SingUp = () => {
-    const navigate = useNavigate()
-    const [error, setError] = useState(false)
-    const [loading, setLoading] = useState(false)
+    const navigate = useNavigate();
+    const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const initialValues = {
         email: '',
         password: '',
-        confirmPassword: '',
-    }
+        confirmPassword: ''
+    };
 
     const submitRegister = (values) => {
         submitForm({
@@ -39,28 +39,17 @@ const SingUp = () => {
             payload: {
                 username: values.email,
                 email: values.email,
-                password: values.password,
+                password: values.password
             },
             navigate,
-            setError,
-        })
-    }
+            setError
+        });
+    };
 
     return (
-        <Formik
-            initialValues={initialValues}
-            onSubmit={submitRegister}
-            validationSchema={ValidationSchema}
-        >
+        <Formik initialValues={initialValues} onSubmit={submitRegister} validationSchema={ValidationSchema}>
             {(formik) => {
-                const {
-                    values,
-                    handleChange,
-                    handleSubmit,
-                    handleBlur,
-                    errors,
-                    touched,
-                } = formik
+                const { values, handleChange, handleSubmit, handleBlur, errors, touched } = formik;
                 return (
                     <FormWrapper>
                         <Form handleSubmit={handleSubmit} title="Sing Up">
@@ -97,31 +86,20 @@ const SingUp = () => {
                                     type={'password'}
                                     placeholder={'Repeat password'}
                                 />
-                                {error && (
-                                    <p className="font-Inter text-sm font-extralight !text-primaryRed">
-                                        Email already exist
-                                    </p>
-                                )}
+                                {error && <p className="font-Inter text-sm font-extralight text-primaryRed!">Email already exist</p>}
                             </div>
                             <div className="flex w-full flex-col gap-8 md:gap-7">
-                                <FormButton
-                                    disabled={loading}
-                                    submit={submitRegister}
-                                >
+                                <FormButton disabled={loading} submit={submitRegister}>
                                     {' '}
                                     Create an account
                                 </FormButton>
-                                <AuthFooter
-                                    message="Already have an account?"
-                                    linkMessage="Login"
-                                    linkPath="/Login"
-                                />
+                                <AuthFooter message="Already have an account?" linkMessage="Login" linkPath="/Login" />
                             </div>
                         </Form>
                     </FormWrapper>
-                )
+                );
             }}
         </Formik>
-    )
-}
-export default SingUp
+    );
+};
+export default SingUp;
