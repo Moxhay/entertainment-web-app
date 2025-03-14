@@ -1,9 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
+@theme {
+    --color-primaryRed: #FC4747;
+    --color-primaryDarkBlue: #10141E;
+    --color-primaryGrey: #979797;
+    --color-secondaryDarkBlue: #161D2F;
+    --color-greyishBlue: #5A698F;
+    --color-primaryWhite: #ffffff;
+    --breakpoint-xs: 375px;
+    --breakpoint-3xl: 2000px;
+    --font-Inter: "Inter", sans-serif;
+}
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -21,3 +28,4 @@ input:-webkit-autofill:active {
     color: #F00;
     outline: none;
 }
+
