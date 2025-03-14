@@ -25,7 +25,7 @@ const InputLabel = ({
                 onChange={onChange}
                 onBlur={onBlur}
                 value={value}
-                className="bg-inherit bg-origin-content pl-5 font-Inter text-sm text-primaryWhite placeholder-primaryGrey caret-red-500 outline-none autofill:bg-none focus:text-primaryWhite focus:ring-0"
+                className="bg-inherit bg-origin-content pl-5 font-Inter text-sm text-primaryWhite placeholder-primaryGrey caret-red-500 outline-hidden autofill:bg-none focus:text-primaryWhite focus:ring-0"
                 placeholder={placeholder}
             />
             {errors && touched && (
