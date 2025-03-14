@@ -1,65 +1,55 @@
-import SearchIcon from '../assets/icons/SearchIcon.jsx'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { Formik } from 'formik'
-import * as Yup from 'yup'
-import { useEffect, useRef } from 'react'
+import SearchIcon from '../assets/icons/SearchIcon.jsx';
+import { useNavigate } from 'react-router-dom';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { useSearchQuery } from '@hooks/useGetSearchQuery.jsx';
+import PropTypes from 'prop-types';
 
 const ValidationSchema = Yup.object().shape({
     search: Yup.string()
         .trim()
         .min(1, 'The search field cannot be empty')
         .max(100, 'Search query is too long (max 100 characters)')
-        .required('Search is required'),
-})
-const SearchBar = ({ search, setSearch, disable }) => {
-    const { pathname, search: queryString } = useLocation()
-    const formikRef = useRef()
-    const navigate = useNavigate()
-    const params = new URLSearchParams(queryString)
-    const queryFromURL = decodeURIComponent(params.get('q') || '')
+        .required('Search is required')
+});
 
-    useEffect(() => {
-        if (queryFromURL !== '') {
-            setSearch(queryFromURL)
-            formikRef.current.resetForm({ values: { search: queryFromURL } })
-        } else {
-            setSearch('')
-            formikRef.current.resetForm({ values: { search: '' } })
-        }
-    }, [queryString, disable])
+export function SearchBar({ search, setSearch }) {
+    const navigate = useNavigate();
+    const { pathname, formikRef } = useSearchQuery(setSearch);
     const messages = {
         '/': 'Search for movies or TV series',
         '/Movies': 'Search for movies',
-        '/TvSeries': 'Search for TV series',
-        '/Bookmark': 'Search for bookmarked show',
-    }
-    const message = messages[pathname]
+        '/Series': 'Search for TV series',
+        '/Bookmark': 'Search for bookmarked show'
+    };
+    const message = messages[pathname];
     const initialValues = {
-        search: '',
-    }
+        search: ''
+    };
     const submitForm = (values) => {
         if (search !== values.search) {
-            setSearch(values.search)
-            navigate(`?q=${encodeURIComponent(values.search)}`)
+            setSearch(values.search);
+            if (search !== values.search) {
+                setSearch(values.search);
+                const newQuery = `?q=${encodeURIComponent(values.search)}`;
+
+                if (pathname.includes('/search')) {
+                    navigate(`${pathname.split('?')[0]}${newQuery}`);
+                }
+
+                if (pathname === '/') {
+                    navigate(`${pathname}search${newQuery}`);
+                } else {
+                    navigate(`${pathname}/search${newQuery}`);
+                }
+            }
         }
-    }
+    };
 
     return (
-        <Formik
-            innerRef={formikRef}
-            initialValues={initialValues}
-            onSubmit={submitForm}
-            validationSchema={ValidationSchema}
-        >
+        <Formik innerRef={formikRef} initialValues={initialValues} onSubmit={submitForm} validationSchema={ValidationSchema}>
             {(formik) => {
-                const {
-                    values,
-                    handleChange,
-                    handleSubmit,
-                    handleBlur,
-                    errors,
-                    touched,
-                } = formik
+                const { values, handleChange, handleSubmit, errors, touched } = formik;
 
                 return (
                     <form
@@ -69,28 +59,25 @@ const SearchBar = ({ search, setSearch, disable }) => {
                         <label className="flex">
                             <SearchIcon />
                             <input
-                                disabled={disable}
                                 type="text"
                                 name="search"
                                 id="search"
                                 onChange={handleChange}
-                                onBlur={handleBlur}
                                 value={values.search}
-                                className="z-0 w-full border-none bg-primaryDarkBlue p-2 font-Inter text-sm text-primaryWhite placeholder-gray-400 caret-red-500 outline-none focus:border-b-2 focus:border-b-greyishBlue focus:text-primaryWhite focus:ring-0 active:text-primaryWhite disabled:cursor-not-allowed"
+                                className="bg-primaryDarkBlue font-Inter text-primaryWhite focus:border-b-greyishBlue focus:text-primaryWhite active:text-primaryWhite z-0 w-full border-none p-2 text-sm placeholder-gray-400 caret-red-500 outline-hidden focus:border-b-2 focus:ring-0 disabled:cursor-not-allowed"
                                 placeholder={message}
                             />
                         </label>
 
-                        {errors.search && touched.search && (
-                            <div className="pl-10 text-sm text-red-500">
-                                {errors.search}
-                            </div>
-                        )}
+                        {errors.search && touched.search && <div className="pl-10 text-sm text-red-500">{errors.search}</div>}
                     </form>
-                )
+                );
             }}
         </Formik>
-    )
+    );
 }
 
-export default SearchBar
+SearchBar.propTypes = {
+    setSearch: PropTypes.func.isRequired,
+    search: PropTypes.string.isRequired
+};
