@@ -1,22 +1,22 @@
-import PropTypes from 'prop-types'
-import Header from './NavBar/Header.jsx'
-import { Outlet } from 'react-router-dom'
+import PropTypes from 'prop-types';
+import Header from './NavBar/Header.jsx';
+import { Outlet } from 'react-router-dom';
 
 const Layout = () => {
     return (
-        <div className="mx-auto flex h-full min-h-screen w-full flex-col overflow-hidden bg-primaryDarkBlue sm:flex-col xl:flex-row">
-            <div className="flex">
+        <div className="bg-primaryDarkBlue mx-auto flex h-full min-h-screen w-full flex-col overflow-hidden sm:flex-col xl:flex-row">
+            <>
                 <Header />
-            </div>
+            </>
 
-            <main className="flex h-full w-full flex-col py-5 xl:pl-40 xl:pt-5">
+            <main className="flex h-full w-full flex-col py-5 xl:pt-5 xl:pl-40">
                 <Outlet />
             </main>
         </div>
-    )
-}
+    );
+};
 
-export default Layout
+export default Layout;
 Layout.propTypes = {
-    children: PropTypes.node,
-}
+    children: PropTypes.node
+};
