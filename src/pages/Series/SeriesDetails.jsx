@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { validateSlug } from '@/helpers.jsx';
+import { contentStatus, validateSlug } from '@/helpers.jsx';
 import { useNavigate, useParams } from 'react-router-dom';
 import ContentSection from '@components/ContentSection.jsx';
 import { useGetSingleSeriesQuery, useGetSingleSeriesSeasonQuery } from '@/api/seriesApi.js';
@@ -20,7 +20,11 @@ export function SeriesDetails() {
     }, [title, documentId, redirect]);
     const { episodeUrl, handleEpisodes, handleSeasons, handleNextEpisode, handlePrevEpisode, selectSeason, setEpisodeUrl } =
         useSeriesPlayer({ seasons, isLoading });
-    if (isLoadingSeries || isLoadingSeasons) return <div>loading...</div>;
+    const status = contentStatus({
+        isLoading,
+        error: isErrorSeries || isErrorSeasons
+    });
+    if (status) return status;
     return (
         <ContentSection>
             <div className="flex justify-center xl:pr-5">
