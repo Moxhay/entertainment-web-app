@@ -1,10 +1,12 @@
 import { Navigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import PropTypes from 'prop-types';
 
-const PrivateRoute = ({ children }) => {
+export const PrivateRoute = ({ children }) => {
     const token = Cookies.get('jwt');
 
     return token ? children : <Navigate to="/Login" />;
 };
-
-export default PrivateRoute;
+PrivateRoute.propTypes = {
+    children: PropTypes.node.isRequired
+};
