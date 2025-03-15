@@ -26,16 +26,14 @@ export function useGallery(data) {
         measureSliderWidth();
         measureSlidesWidth();
 
-        // Recalcular el tamaño en redimensionamientos
         window.addEventListener('resize', measureSliderWidth);
         window.addEventListener('resize', measureSlidesWidth);
 
-        // Limpiar listeners cuando el componente se desmonte
         return () => {
             window.removeEventListener('resize', measureSliderWidth);
             window.removeEventListener('resize', measureSlidesWidth);
         };
-    }, [data.length, sliderWidth, slidesWidth]); // Dependencias: cuando cambia la cantidad de datos o los tamaños
+    }, [data.length, sliderWidth, slidesWidth]);
 
     return {
         sliderRef,

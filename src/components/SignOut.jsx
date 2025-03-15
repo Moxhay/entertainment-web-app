@@ -8,8 +8,7 @@ export const SignOut = () => {
     const [anchorEl, setAnchorEl] = useState(null);
     const navigate = useNavigate();
     const open = Boolean(anchorEl);
-
-    // Detecta si la pantalla es xl (1200px o más)
+    
     const isXL = useMediaQuery('(min-width: 1280px)');
 
     const handleClick = (event) => {
