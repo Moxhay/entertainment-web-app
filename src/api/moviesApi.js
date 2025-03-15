@@ -61,7 +61,7 @@ export const moviesApi = createApi({
             query: () => {
                 const userId = Cookies.get('id');
                 return {
-                    url: `movies?filters[bookmarkeds][users_permissions_user][id][$eq]=${userId}&populate=cover_path&populate=bookmarked.movie.bookmarked`
+                    url: `movies?filters[bookmarkeds][users_permissions_user][id][$eq]=${userId}&populate=cover_path&populate=bookmarkeds.movie.bookmarkeds`
                 };
             },
             transformResponse: (response) => transformResponse(response),

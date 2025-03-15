@@ -5,7 +5,7 @@ import Movies from './pages/Movies/Movies.jsx';
 import TvSeries from './pages/Series/TvSeries.jsx';
 import { Bookmarked } from './pages/Bookmarked/Bookmarked.jsx';
 import SingUp from './pages/Auth/SingUp.jsx';
-import PrivateRoute from './components/PrivateRoute.jsx';
+import { PrivateRoute } from './components/PrivateRoute.jsx';
 import Login from './pages/Auth/Login.jsx';
 import { AnimatePresence } from 'framer-motion';
 import { HomeSearchView } from '@/pages/Home/HomeSearchView.jsx';
