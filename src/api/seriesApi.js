@@ -64,7 +64,7 @@ export const seriesApi = createApi({
         getBookmarkedSeries: builder.query({
             query: () => {
                 const userId = Cookies.get('id');
-                const queryParams = `Tv-series?filters[bookmarkeds][users_permissions_user][id][$eq]=${userId}&populate=cover_path&populate=bookmarked.movie.bookmarked`;
+                const queryParams = `Tv-series?filters[bookmarkeds][users_permissions_user][id][$eq]=${userId}&populate=cover_path&populate=bookmarkeds.series.bookmarkeds`;
                 return {
                     url: queryParams
                 };
