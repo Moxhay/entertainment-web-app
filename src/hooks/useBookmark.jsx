@@ -85,8 +85,6 @@ const useBookmark = () => {
     };
 
     const postBookmarked = async ({ id, userId, contentType, documentID }) => {
-        console.log(contentType);
-        console.log(documentID);
         const res = await api.apiVideo.postBookmarked({
             data: {
                 uid: userId + id,
