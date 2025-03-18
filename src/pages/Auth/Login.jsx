@@ -69,13 +69,13 @@ const Login = () => {
                                     type={'password'}
                                     placeholder={'Password'}
                                 />
-                                {error && <p className="font-Inter text-sm font-extralight text-primaryRed!">Invalid email or password</p>}
+                                {error && <p className="font-Inter text-primaryRed! text-sm font-extralight">Invalid email or password</p>}
                             </div>
                             <div className="flex w-full flex-col gap-8 md:gap-7">
                                 <FormButton disabled={loading} submit={submitRegister}>
                                     Login to your account
                                 </FormButton>
-                                <AuthFooter message="Dont't have an account?" linkMessage="Sing Up" linkPath="/SingUp" />
+                                <AuthFooter message="Dont't have an account?" linkMessage="Sing Up" linkPath="/SignUp" />
                             </div>
                         </Form>
                     </FormWrapper>

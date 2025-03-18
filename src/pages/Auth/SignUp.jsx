@@ -21,7 +21,7 @@ const ValidationSchema = Yup.object().shape({
         .oneOf([Yup.ref('password'), null], 'Password must match.')
         .required('Confirm Password is required.')
 });
-const SingUp = () => {
+const SignUp = () => {
     const navigate = useNavigate();
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -86,7 +86,7 @@ const SingUp = () => {
                                     type={'password'}
                                     placeholder={'Repeat password'}
                                 />
-                                {error && <p className="font-Inter text-sm font-extralight text-primaryRed!">Email already exist</p>}
+                                {error && <p className="font-Inter text-primaryRed! text-sm font-extralight">Email already exist</p>}
                             </div>
                             <div className="flex w-full flex-col gap-8 md:gap-7">
                                 <FormButton disabled={loading} submit={submitRegister}>
@@ -102,4 +102,4 @@ const SingUp = () => {
         </Formik>
     );
 };
-export default SingUp;
+export default SignUp;
