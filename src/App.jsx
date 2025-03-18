@@ -4,7 +4,7 @@ import { Home } from './pages/Home/Home.jsx';
 import Movies from './pages/Movies/Movies.jsx';
 import TvSeries from './pages/Series/TvSeries.jsx';
 import { Bookmarked } from './pages/Bookmarked/Bookmarked.jsx';
-import SingUp from './pages/Auth/SingUp.jsx';
+import SignUp from './pages/Auth/SignUp.jsx';
 import { PrivateRoute } from './components/PrivateRoute.jsx';
 import Login from './pages/Auth/Login.jsx';
 import { AnimatePresence } from 'framer-motion';
@@ -22,7 +22,7 @@ function App() {
         <AnimatePresence mode={'wait'}>
             <Routes location={location} key={pathname + search}>
                 <Route path="*" element={<Navigate to="/" />} />
-                <Route path="/SingUp" element={<SingUp />} />
+                <Route path="/SignUp" element={<SignUp />} />
                 <Route path="/Login" element={<Login />} />
 
                 <Route
