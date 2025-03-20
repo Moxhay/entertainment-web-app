@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export function useAnimationState(data, query) {
+export function useAnimationState(data, query, loadingBookmarked) {
     const [olData, setOldData] = useState([]);
     const [title, setTitle] = useState('');
     const [isAnimationComplete, setIsAnimationComplete] = useState(true);
@@ -11,6 +11,12 @@ export function useAnimationState(data, query) {
         }
     }, [data, isAnimationComplete, query]);
 
+    useEffect(() => {
+        if (loadingBookmarked) {
+            setOldData(data);
+            setTitle(query);
+        }
+    }, [loadingBookmarked, data, query]);
     return {
         setIsAnimationComplete,
         isAnimationComplete,
