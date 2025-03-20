@@ -43,7 +43,7 @@ const useBookmark = () => {
         const queries = state[api.reducerPath].queries;
 
         Object.keys(queries).forEach((key) => {
-            if (key.startsWith(`${searchEndpoint}(`)) {
+            if (key.startsWith(`${searchEndpoint}`)) {
                 const queryArgs = queries[key]?.originalArgs;
                 if (queryArgs) {
                     dispatch(
@@ -85,9 +85,10 @@ const useBookmark = () => {
     };
 
     const postBookmarked = async ({ id, userId, contentType, documentID }) => {
+        console.log(id);
         const res = await api.apiVideo.postBookmarked({
             data: {
-                uid: userId + id,
+                uid: userId + id + contentType,
                 users_permissions_user: userId,
                 [contentType]: documentID
             }
