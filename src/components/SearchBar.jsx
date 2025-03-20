@@ -4,6 +4,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useSearchQuery } from '@hooks/useGetSearchQuery.jsx';
 import PropTypes from 'prop-types';
+import { useCallback } from 'react';
 
 const ValidationSchema = Yup.object().shape({
     search: Yup.string()
@@ -26,9 +27,8 @@ export function SearchBar({ search, setSearch }) {
     const initialValues = {
         search: ''
     };
-    const submitForm = (values) => {
-        if (search !== values.search) {
-            setSearch(values.search);
+    const submitForm = useCallback(
+        (values) => {
             if (search !== values.search) {
                 setSearch(values.search);
                 const newQuery = `?q=${encodeURIComponent(values.search)}`;
@@ -44,8 +44,9 @@ export function SearchBar({ search, setSearch }) {
                     navigate(`${pathname}/search${newQuery}`);
                 }
             }
-        }
-    };
+        },
+        [search, setSearch, pathname, navigate]
+    );
 
     return (
         <Formik innerRef={formikRef} initialValues={initialValues} onSubmit={submitForm} validationSchema={ValidationSchema}>
