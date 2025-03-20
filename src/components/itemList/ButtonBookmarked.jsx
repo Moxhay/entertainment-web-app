@@ -2,11 +2,10 @@ import BookmarkedButton from '../../assets/icons/BookmarkedButton.jsx';
 import PropTypes from 'prop-types';
 
 export function ButtonBookmarked({ id, bookmarked, loadingBookmarked, handleBookmarked, border, setBorder, type, documentID }) {
+    console.log(loadingBookmarked[id]);
     return (
         <div
-            className={`absolute right-2 top-2 z-40 flex h-8 w-8 items-center justify-center rounded-full ${bookmarked ? 'bg-black' : 'bg-black hover:bg-white'} opacity-80 ${
-                loadingBookmarked[id] & 'cursor-not-allowed'
-            }`}
+            className={`absolute top-2 right-2 z-40 flex h-8 w-8 items-center justify-center rounded-full ${bookmarked ? 'bg-black' : 'bg-black hover:bg-white'} opacity-80`}
             onMouseEnter={() => setBorder({ [id]: true })}
             onMouseLeave={() => setBorder({ [id]: false })}
         >
@@ -20,6 +19,7 @@ export function ButtonBookmarked({ id, bookmarked, loadingBookmarked, handleBook
                         documentID
                     })
                 }
+                className={loadingBookmarked[id] ? 'cursor-not-allowed' : 'hover:cursor-pointer'}
             >
                 <BookmarkedButton
                     bg={bookmarked ? (border[id] ? '#FC4747' : 'white') : 'none'}
