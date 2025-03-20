@@ -35,6 +35,7 @@ export function SearchBar({ search, setSearch }) {
 
                 if (pathname.includes('/search')) {
                     navigate(`${pathname.split('?')[0]}${newQuery}`);
+                    return;
                 }
 
                 if (pathname === '/') {
