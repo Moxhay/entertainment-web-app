@@ -12,7 +12,7 @@ export function MoviesSearchView() {
     const { search, setSearch, query } = useSearchQuery();
     const { loadingBookmarked, handleBookmarked } = useBookmark();
     const { data: movies, error, isLoading } = useGetMovieQuery(query);
-    const { setIsAnimationComplete, isAnimationComplete, title, olData } = useAnimationState(movies, query);
+    const { setIsAnimationComplete, isAnimationComplete, title, olData } = useAnimationState(movies, query, loadingBookmarked);
 
     const status = contentStatus({
         isLoading,

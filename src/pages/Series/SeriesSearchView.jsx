@@ -12,7 +12,7 @@ export function SeriesSearchView() {
     const { search, setSearch, query } = useSearchQuery();
     const { loadingBookmarked, handleBookmarked } = useBookmark();
     const { data: series, error, isLoading } = useGetSearchSeriesQuery(query);
-    const { setIsAnimationComplete, isAnimationComplete, title, olData } = useAnimationState(series, query);
+    const { setIsAnimationComplete, isAnimationComplete, title, olData } = useAnimationState(series, query, loadingBookmarked);
 
     const status = contentStatus({
         isLoading,

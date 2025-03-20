@@ -12,7 +12,7 @@ export function HomeSearchView() {
     const { search, setSearch, query } = useSearchQuery();
     const { loadingBookmarked, handleBookmarked } = useBookmark();
     const { isLoading, error, searchMoviesSeries } = useSearchMoviesSeries(search);
-    const { setIsAnimationComplete, isAnimationComplete, title, olData } = useAnimationState(searchMoviesSeries, query);
+    const { setIsAnimationComplete, isAnimationComplete, title, olData } = useAnimationState(searchMoviesSeries, query, loadingBookmarked);
 
     const status = contentStatus({
         isLoading,
