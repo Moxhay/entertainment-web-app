@@ -79,7 +79,7 @@ export const seriesApi = createApi({
                     url: 'tv-series',
                     params: {
                         'populate[bookmarkeds][filters][users_permissions_user][id][$eq]': userId,
-                        'filters[bookmarked][$notNull]': true,
+                        'filters[bookmarkeds][$notNull]': true,
                         populate: 'cover_path',
                         'filters[title][$containsi]': searchSeries
                     }
