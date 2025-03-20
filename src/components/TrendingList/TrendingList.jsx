@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useGallery } from '@hooks/useGallery.jsx';
 import { TrendingListContainer } from '@components/TrendingList/TrendingListContainer.jsx';
 import { TrendingListGallery } from '@components/TrendingList/TrendingListGallery.jsx';
 import { TrendingCard } from '@components/TrendingList/TrendingCard.jsx';
 
-export function TrendingList({ data, handleBookmarked, loadingBookmarked }) {
+export const TrendingList = React.memo(({ data, loadingBookmarked, handleBookmarked }) => {
     const [border, setBorder] = useState({});
     const { sliderRef, slidesRef, sliderWidth, slidesWidth, totalSlidesMarginRight } = useGallery(data);
     return (
@@ -32,7 +32,7 @@ export function TrendingList({ data, handleBookmarked, loadingBookmarked }) {
             </TrendingListGallery>
         </TrendingListContainer>
     );
-}
+});
 
 TrendingList.propTypes = {
     data: PropTypes.array.isRequired,
