@@ -5,8 +5,8 @@ export function ButtonBookmarked({ id, bookmarked, loadingBookmarked, handleBook
     return (
         <div
             className={`absolute top-2 right-2 z-40 flex h-8 w-8 items-center justify-center rounded-full ${bookmarked ? 'bg-black' : 'bg-black hover:bg-white'} opacity-80`}
-            onMouseEnter={() => setBorder({ [id]: true })}
-            onMouseLeave={() => setBorder({ [id]: false })}
+            onMouseEnter={() => setBorder({ [id + type]: true })}
+            onMouseLeave={() => setBorder({ [id + type]: false })}
         >
             <button
                 disabled={loadingBookmarked[id]}
