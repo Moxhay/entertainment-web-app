@@ -18,11 +18,11 @@ export function ButtonBookmarked({ id, bookmarked, loadingBookmarked, handleBook
                         documentID
                     })
                 }
-                className={loadingBookmarked[id] ? 'cursor-not-allowed' : 'hover:cursor-pointer'}
+                className={loadingBookmarked[id + type] ? 'cursor-not-allowed' : 'hover:cursor-pointer'}
             >
                 <BookmarkedButton
-                    bg={bookmarked ? (border[id] ? '#FC4747' : 'white') : 'none'}
-                    border={bookmarked ? 'none' : border[id] ? 'black' : 'white'}
+                    bg={bookmarked ? (border[id + type] ? '#FC4747' : 'white') : 'none'}
+                    border={bookmarked ? 'none' : border[id + type] ? 'black' : 'white'}
                 />
             </button>
         </div>
