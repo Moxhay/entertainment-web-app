@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import ContentSection from '@components/ContentSection.jsx';
 import { useGetSingleSeriesQuery, useGetSingleSeriesSeasonQuery } from '@/api/seriesApi.js';
 import { VideoPlayer } from '@components/VideoPlayer/VideoPlayer.jsx';
-import { useSeriesPlayer } from '@hooks/useSeriesPlayer.jsx';
+import { useSeriesPlayer } from '@hooks/videoPlayerHooks/useSeriesPlayer.jsx';
 
 export function SeriesDetails() {
     const { title, documentId } = useParams();
