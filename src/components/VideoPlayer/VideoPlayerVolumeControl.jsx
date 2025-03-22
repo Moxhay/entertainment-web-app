@@ -1,9 +1,16 @@
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
+import { useVideoPlayerVolumeControl } from '@hooks/videoPlayerHooks/useVideoPlayerVolumeControl.jsx';
+import React from 'react';
 
-export const VideoPlayerVolumeControl = ({ progressVolume, handleVolumeDrag, onClick, Ref }) => {
+export const VideoPlayerVolumeControl = React.memo(({ Ref }) => {
+    const { progressVolume, handleVolumeChange, handleVolumeDrag, volumeBarRef } = useVideoPlayerVolumeControl({ videoRef: Ref });
     return (
-        <div className="bg-secondaryDarkBlue relative flex h-2 w-24 cursor-pointer rounded-2xl sm:w-24" onClick={onClick} ref={Ref}>
+        <div
+            className="bg-secondaryDarkBlue relative flex h-2 w-24 cursor-pointer rounded-2xl sm:w-24"
+            onClick={handleVolumeChange}
+            ref={volumeBarRef}
+        >
             <motion.div className="bg-primaryRed flex h-full items-center justify-end rounded-full" style={{ width: `${progressVolume}%` }}>
                 <motion.div
                     className="bg-primaryRed size-3.5 cursor-grab rounded-2xl"
@@ -18,10 +25,7 @@ export const VideoPlayerVolumeControl = ({ progressVolume, handleVolumeDrag, onC
             </motion.div>
         </div>
     );
-};
+});
 VideoPlayerVolumeControl.propTypes = {
-    handleVolumeDrag: PropTypes.func.isRequired,
-    progressVolume: PropTypes.number.isRequired,
-    Ref: PropTypes.object.isRequired,
-    onClick: PropTypes.func.isRequired
+    Ref: PropTypes.object.isRequired
 };
