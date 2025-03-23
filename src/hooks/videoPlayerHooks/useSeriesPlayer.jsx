@@ -1,42 +1,40 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 export const useSeriesPlayer = ({ seasons, isLoading }) => {
     const [selectSeason, setSelectSeason] = useState([]);
     const [selectEpisode, setSelectEpisode] = useState(null);
     const [episodeUrl, setEpisodeUrl] = useState(null);
-    const [seasonEpisodesMap, setSeasonEpisodesMap] = useState({});
     const [currentSeason, setCurrentSeason] = useState(null);
-    useEffect(() => {
-        if (!isLoading && seasons.length > 0) {
-            const episodesMap = {};
 
-            seasons.forEach((season) => {
-                const seasonTitle = season.SeasonTitle.match(/Season \d{2}/)?.[0];
-                if (seasonTitle) {
-                    episodesMap[seasonTitle] = season.seasonsEpisodes.map((episode) => ({
-                        title: episode.Title,
-                        url: episode.Tv_episode_path?.url || null
-                    }));
-                }
-            });
+    const seasonEpisodesMap = useMemo(() => {
+        if (isLoading || seasons.length === 0) return {};
 
-            setSeasonEpisodesMap(episodesMap);
-        }
-    }, [isLoading, seasons, selectEpisode, selectSeason]);
+        const episodesMap = {};
+        seasons.forEach((season) => {
+            const seasonTitle = season.SeasonTitle.match(/Season \d{2}/)?.[0];
+            if (seasonTitle) {
+                episodesMap[seasonTitle] = season.seasonsEpisodes.map((episode) => ({
+                    title: episode.Title,
+                    url: episode.Tv_episode_path?.url || null
+                }));
+            }
+        });
+        return episodesMap;
+    }, [isLoading, seasons]);
 
-    const handleSeasons = (seasons) => {
-        if (selectSeason.includes(seasons)) {
-            return setSelectSeason(selectSeason.filter((s) => s !== seasons));
-        }
+    const handleSeasons = useCallback((seasonName) => {
+        setSelectSeason((prevSeasons) =>
+            prevSeasons.includes(seasonName) ? prevSeasons.filter((s) => s !== seasonName) : [...prevSeasons, seasonName]
+        );
+    }, []);
 
-        setSelectSeason([...selectSeason, seasons]);
-    };
-    const handleEpisodes = (episodeTitle, url, season) => {
+    const handleEpisodes = useCallback((episodeTitle, url, season) => {
         setSelectEpisode(episodeTitle);
         setEpisodeUrl(url);
         setCurrentSeason(season);
-    };
-    const handleNextEpisode = () => {
+    }, []);
+
+    const handleNextEpisode = useCallback(() => {
         if (!selectEpisode || !currentSeason) return;
 
         const seasonKeys = Object.keys(seasonEpisodesMap);
@@ -52,14 +50,13 @@ export const useSeriesPlayer = ({ seasons, isLoading }) => {
         } else if (currentSeasonIndex !== -1 && currentSeasonIndex < seasonKeys.length - 1) {
             const nextSeason = seasonKeys[currentSeasonIndex + 1];
             const firstEpisode = seasonEpisodesMap[nextSeason][0];
-
             setCurrentSeason(nextSeason);
             setSelectEpisode(firstEpisode.title);
             setEpisodeUrl(firstEpisode.url);
         }
-    };
+    }, [currentSeason, selectEpisode, seasonEpisodesMap]);
 
-    const handlePrevEpisode = () => {
+    const handlePrevEpisode = useCallback(() => {
         if (!selectEpisode || !currentSeason) return;
 
         const seasonKeys = Object.keys(seasonEpisodesMap);
@@ -75,12 +72,12 @@ export const useSeriesPlayer = ({ seasons, isLoading }) => {
         } else if (currentSeasonIndex > 0) {
             const prevSeason = seasonKeys[currentSeasonIndex - 1];
             const lastEpisode = seasonEpisodesMap[prevSeason].slice(-1)[0];
-
             setCurrentSeason(prevSeason);
             setSelectEpisode(lastEpisode.title);
             setEpisodeUrl(lastEpisode.url);
         }
-    };
+    }, [currentSeason, selectEpisode, seasonEpisodesMap]);
+
     return {
         episodeUrl,
         handlePrevEpisode,
