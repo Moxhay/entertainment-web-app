@@ -18,7 +18,7 @@ export const MoviesDetails = () => {
                     <div key={movie.id} className="md:item flex h-full w-full flex-wrap gap-4 xl:pr-3">
                         <VideoPlayer
                             src={movie.movie_Url?.url}
-                            tittle={movie.title}
+                            title={movie.title}
                             className="3xl:h-[85vh] group relative aspect-video h-fit w-full rounded-2xl bg-black object-contain lg:h-[80vh]"
                             classNameIsFullScreen="h-full"
                             isLoading={isLoading}
