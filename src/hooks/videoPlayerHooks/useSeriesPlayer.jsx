@@ -3,7 +3,8 @@ import { useCallback, useMemo, useState } from 'react';
 export const useSeriesPlayer = ({ seasons, isLoading }) => {
     const [selectSeason, setSelectSeason] = useState([]);
     const [selectEpisode, setSelectEpisode] = useState(null);
-    const [episodeUrl, setEpisodeUrl] = useState(null);
+    const [episodeUrl, setEpisodeUrl] = useState('');
+    const [episodeTitle, setEpisodeTitle] = useState('');
     const [currentSeason, setCurrentSeason] = useState(null);
 
     const seasonEpisodesMap = useMemo(() => {
@@ -31,6 +32,7 @@ export const useSeriesPlayer = ({ seasons, isLoading }) => {
     const handleEpisodes = useCallback((episodeTitle, url, season) => {
         setSelectEpisode(episodeTitle);
         setEpisodeUrl(url);
+        setEpisodeTitle(episodeTitle);
         setCurrentSeason(season);
     }, []);
 
@@ -47,12 +49,14 @@ export const useSeriesPlayer = ({ seasons, isLoading }) => {
             const nextEpisode = episodes[currentIndex + 1];
             setSelectEpisode(nextEpisode.title);
             setEpisodeUrl(nextEpisode.url);
+            setEpisodeTitle(nextEpisode.title);
         } else if (currentSeasonIndex !== -1 && currentSeasonIndex < seasonKeys.length - 1) {
             const nextSeason = seasonKeys[currentSeasonIndex + 1];
             const firstEpisode = seasonEpisodesMap[nextSeason][0];
             setCurrentSeason(nextSeason);
             setSelectEpisode(firstEpisode.title);
             setEpisodeUrl(firstEpisode.url);
+            setEpisodeTitle(firstEpisode.title);
         }
     }, [currentSeason, selectEpisode, seasonEpisodesMap]);
 
@@ -69,17 +73,20 @@ export const useSeriesPlayer = ({ seasons, isLoading }) => {
             const prevEpisode = episodes[currentIndex - 1];
             setSelectEpisode(prevEpisode.title);
             setEpisodeUrl(prevEpisode.url);
+            setEpisodeTitle(prevEpisode.title);
         } else if (currentSeasonIndex > 0) {
             const prevSeason = seasonKeys[currentSeasonIndex - 1];
             const lastEpisode = seasonEpisodesMap[prevSeason].slice(-1)[0];
             setCurrentSeason(prevSeason);
             setSelectEpisode(lastEpisode.title);
             setEpisodeUrl(lastEpisode.url);
+            setEpisodeTitle(lastEpisode.title);
         }
     }, [currentSeason, selectEpisode, seasonEpisodesMap]);
 
     return {
         episodeUrl,
+        episodeTitle,
         handlePrevEpisode,
         handleEpisodes,
         handleNextEpisode,

@@ -1,14 +1,16 @@
 import { useCallback, useEffect, useState } from 'react';
 
-export const useVideoPlayPauseHandler = ({ videoRef }) => {
+export const useVideoPlayPauseHandler = ({ videoRef, title }) => {
     const [playing, setPlaying] = useState(false);
-    const [url, setUrl] = useState('');
+    const [episodeTitle, setEpisodeTitle] = useState('');
     useEffect(() => {
-        if (videoRef.current?.src !== url) {
-            setUrl(videoRef.current?.src);
+        if (episodeTitle !== title) {
             setPlaying(false);
+            setEpisodeTitle(title);
+            videoRef.current?.pause();
+            videoRef.current.currentTime = 0;
         }
-    }, [videoRef]);
+    }, [title]);
     const videoHandler = useCallback(
         (control) => {
             if (!videoRef.current) return;

@@ -7,13 +7,13 @@ import { useVideoPlayer } from '@hooks/videoPlayerHooks/useVideoPlayer.jsx';
 import { ButtonFullScreen } from '@components/VideoPlayer/ButtonFullScreen.jsx';
 import { useVideoPlayPauseHandler } from '@hooks/videoPlayerHooks/useVideoPlayPauseHandler.jsx';
 
-export const VideoPlayer = ({ tittle, src, className, classNameIsFullScreen, isLoading }) => {
+export const VideoPlayer = ({ title, src, className, classNameIsFullScreen, isLoading }) => {
     const { replay, videoContainerRef, videoRef, progressBarContainer, isFullScreen, duration, handleSeek, handleDrag, ProgressBar } =
         useVideoPlayer(isLoading);
-    const { videoHandler, playing } = useVideoPlayPauseHandler({ videoRef });
+    const { videoHandler, playing } = useVideoPlayPauseHandler({ videoRef, title });
     return (
         <div className="group relative flex h-full w-full flex-col" ref={videoContainerRef}>
-            <video ref={videoRef} title={tittle} src={src} className={isFullScreen ? classNameIsFullScreen : className} controls={false} />
+            <video ref={videoRef} title={title} src={src} className={isFullScreen ? classNameIsFullScreen : className} controls={false} />
             <GetControlIcons
                 className={'text-primaryRed absolute inset-0 size-1/10 w-full cursor-pointer self-center'}
                 classNameWithHover={
@@ -52,7 +52,7 @@ export const VideoPlayer = ({ tittle, src, className, classNameIsFullScreen, isL
     );
 };
 VideoPlayer.propTypes = {
-    tittle: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired,
     className: PropTypes.string.isRequired,
     classNameIsFullScreen: PropTypes.string.isRequired,

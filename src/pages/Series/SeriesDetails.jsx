@@ -12,7 +12,7 @@ export function SeriesDetails() {
     const { data: series, error: isErrorSeries, isLoading: isLoadingSeries } = useGetSingleSeriesQuery(documentId);
     const { data: seasons, error: isErrorSeasons, isLoading: isLoadingSeasons } = useGetSingleSeriesSeasonQuery(documentId);
     const isLoading = isLoadingSeries || isLoadingSeasons;
-    const { episodeUrl, handleEpisodes, handleSeasons, handleNextEpisode, handlePrevEpisode, selectSeason, setEpisodeUrl } =
+    const { episodeUrl, handleEpisodes, handleSeasons, handleNextEpisode, handlePrevEpisode, selectSeason, setEpisodeUrl, episodeTitle } =
         useSeriesPlayer({ seasons, isLoading });
     const status = contentStatus({
         isLoading,
@@ -27,7 +27,7 @@ export function SeriesDetails() {
                     <div className={`${episodeUrl ? 'flex' : 'hidden'} w-full flex-col gap-4`}>
                         <VideoPlayer
                             src={episodeUrl}
-                            tittle={''}
+                            title={episodeTitle}
                             className="3xl:h-[85vh] group relative h-[75vh] w-full rounded-2xl bg-black object-contain lg:h-[85vh]"
                             classNameIsFullScreen="h-full"
                             isLoading={isLoading}
@@ -37,7 +37,7 @@ export function SeriesDetails() {
                                 Prev
                             </button>
                             <button className="w-24 cursor-pointer py-2" type="button" onClick={() => setEpisodeUrl('')}>
-                                Episodes
+                                Episode {episodeTitle}
                             </button>
                             <button
                                 className="h-full w-24 cursor-pointer rounded-r-2xl py-2 pr-5 text-end"
