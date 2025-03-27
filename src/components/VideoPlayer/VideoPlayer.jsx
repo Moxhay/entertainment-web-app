@@ -34,7 +34,7 @@ export const VideoPlayer = ({ title, src, className, classNameIsFullScreen, isLo
                     <span className="relative">{duration}</span>
                 </div>
                 <div className="flex w-full items-center justify-between">
-                    <div className="flex w-full items-center gap-x-2">
+                    <div className="flex w-full items-center gap-x-5">
                         <GetControlIcons
                             className={'text-primaryRed size-6 cursor-pointer'}
                             replay={replay}

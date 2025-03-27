@@ -10,7 +10,7 @@ export const VideoPlayerProgressBar = ({ progressBarContainer, handleSeek, progr
         >
             <motion.div className="bg-primaryRed flex h-2 items-center justify-end rounded-2xl" style={{ width: `${progressBar}%` }}>
                 <motion.div
-                    className="bg-primaryRed size-3.5 cursor-grab rounded-2xl"
+                    className="bg-primaryRed absolute size-3.5 cursor-grab rounded-2xl"
                     drag="x"
                     dragConstraints={{
                         left: 0,

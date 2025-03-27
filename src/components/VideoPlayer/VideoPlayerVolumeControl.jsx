@@ -7,13 +7,16 @@ export const VideoPlayerVolumeControl = React.memo(({ Ref }) => {
     const { progressVolume, handleVolumeChange, handleVolumeDrag, volumeBarRef } = useVideoPlayerVolumeControl({ videoRef: Ref });
     return (
         <div
-            className="bg-secondaryDarkBlue relative flex h-2 w-24 cursor-pointer rounded-2xl sm:w-24"
+            className="bg-secondaryDarkBlue relative z-50 flex h-2 w-24 cursor-pointer rounded-xl sm:w-24"
             onClick={handleVolumeChange}
             ref={volumeBarRef}
         >
-            <motion.div className="bg-primaryRed flex h-full items-center justify-end rounded-full" style={{ width: `${progressVolume}%` }}>
+            <motion.div
+                className="bg-primaryRed absolute flex h-full items-center justify-end rounded-full"
+                style={{ width: `${progressVolume}%` }}
+            >
                 <motion.div
-                    className="bg-primaryRed size-3.5 cursor-grab rounded-2xl"
+                    className="bg-primaryRed absolute flex size-3.5 cursor-grab self-center rounded-xl"
                     drag="x"
                     dragConstraints={{
                         left: 0,
