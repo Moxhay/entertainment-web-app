@@ -75,7 +75,7 @@ const Login = () => {
                                 <FormButton disabled={loading} submit={submitRegister}>
                                     Login to your account
                                 </FormButton>
-                                <AuthFooter message="Dont't have an account?" linkMessage="Sing Up" linkPath="/SignUp" />
+                                <AuthFooter message="Dont't have an account?" linkMessage="Sign Up" linkPath="/SignUp" />
                             </div>
                         </Form>
                     </FormWrapper>

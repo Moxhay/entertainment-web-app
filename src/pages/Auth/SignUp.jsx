@@ -52,7 +52,7 @@ const SignUp = () => {
                 const { values, handleChange, handleSubmit, handleBlur, errors, touched } = formik;
                 return (
                     <FormWrapper>
-                        <Form handleSubmit={handleSubmit} title="Sing Up">
+                        <Form handleSubmit={handleSubmit} title="Sign Up">
                             <div className="flex flex-col gap-3">
                                 <FormInput
                                     name={'email'}
